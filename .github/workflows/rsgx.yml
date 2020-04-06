@@ -40,5 +40,6 @@ jobs:
         mkdir tests/sgx/build &&
         cd tests/sgx/build &&
         cmake .. && 
+        make &&
         make test-sgx
       shell: bash
