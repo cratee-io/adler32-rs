@@ -13,6 +13,8 @@ jobs:
     container: 
       image: baiduxlab/sgx-rust:1804-1.1.1
       #image: rust:1.42
+      env:
+        HOME: /root
 
     steps:
     - uses: actions/checkout@v2
