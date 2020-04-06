@@ -12,12 +12,14 @@ jobs:
     runs-on: ubuntu-18.04
     container: 
       image: baiduxlab/sgx-rust:1804-1.1.1
-      env:
-        SHELL: bash  
 
     steps:
     - uses: actions/checkout@v2
+    - name: Set the default shell as 'bash'
+      run: cp 
     - name: Build
       run: cargo build --verbose
+      shell: bash
     - name: Run tests
       run: cd tests/sgx && cmake .. && make test-sgx
+      shell: bash
