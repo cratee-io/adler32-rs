@@ -14,7 +14,7 @@ jobs:
       image: baiduxlab/sgx-rust:1804-1.1.1
       #image: rust:1.42
       env:
-        HOME: /root
+        RUST_VERSION: nightly-2020-03-12
 
     steps:
     - uses: actions/checkout@v2
@@ -26,6 +26,8 @@ jobs:
       run: ln -sf /root/.cargo $HOME/.cargo
     - name: check
       run: cat $HOME/.bashrc && ls -R $HOME/.cargo && echo $PATH
+    - name: env
+      run: env
     - name: cargo
       run: echo $PATH && . ~/.cargo/env && cargo --version
       shell: bash --noprofile -eo pipefail {0}
