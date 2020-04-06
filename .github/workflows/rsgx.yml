@@ -16,8 +16,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: cargo build --verbose
-      shell: bash -eo pipefail {0}
+      run: source ~/.bashrc && cargo build --verbose
+      shell: bash
     - name: Run tests
       run: cd tests/sgx && cmake .. && make test-sgx
       shell: bash
