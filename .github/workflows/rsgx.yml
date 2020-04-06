@@ -20,6 +20,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: cat 
       run: cat /root/.bashrc
+    - name: Copy .bashrc for Github Actions' $HOME
+      run: cp /root/.bashrc $HOME/.bashrc
+    - name: adjust rust toolchains for Github Actions
+      run: ln -sf /root/.cargo $HOME/.cargo
+    - name: cargo
+      run: cargo --version
+      shell: bash --noprofile -eo pipefail {0}
     - name: Build
       run: . /root/.cargo/env && echo $PATH && cargo build --verbose
     - name: Run tests
