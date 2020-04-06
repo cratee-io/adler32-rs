@@ -10,7 +10,10 @@ jobs:
   sgx-test:
 
     runs-on: ubuntu-18.04
-    container: baiduxlab/sgx-rust:1804-1.1.1
+    container: 
+      image: baiduxlab/sgx-rust:1804-1.1.1
+      env:
+        SHELL: bash  
 
     steps:
     - uses: actions/checkout@v2
