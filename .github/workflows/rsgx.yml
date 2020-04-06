@@ -27,7 +27,7 @@ jobs:
     - name: check
       run: cat $HOME/.bashrc && ls -R $HOME/.cargo && echo $PATH
     - name: cargo
-      run: echo $PATH && cargo --version
+      run: echo $PATH && . ~/.cargo/env && cargo --version
       shell: bash --noprofile -eo pipefail {0}
     - name: Build
       run: . /root/.cargo/env && echo $PATH && cargo build --verbose
