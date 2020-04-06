@@ -17,6 +17,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: cat 
       run: cat /root/.bashrc
+    - name: hello
+      run: ls -R /opt
     - name: Build
       run: . /root/.cargo/env && cargo build --verbose
     - name: Run tests
