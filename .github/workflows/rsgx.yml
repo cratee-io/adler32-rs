@@ -18,7 +18,7 @@ jobs:
     - name: cat 
       run: cat /root/.bashrc
     - name: Build
-      run: source ~/.bashrc && cargo build --verbose
+      run: source /root/.bashrc && cargo build --verbose
       shell: bash
     - name: Run tests
       run: cd tests/sgx && cmake .. && make test-sgx
