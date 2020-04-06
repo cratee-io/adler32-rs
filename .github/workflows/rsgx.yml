@@ -23,13 +23,15 @@ jobs:
     - name: Copy .bashrc for Github Actions' $HOME
       run: cp /root/.bashrc $HOME/.bashrc
     - name: adjust rust toolchains for Github Actions
-      run: ln -sf /root/.cargo $HOME/.cargo
+      run: |
+        ln -sf /root/.rustup ~/.rustup &&
+        ln -sf /root/.cargo ~/.cargo
     - name: check
       run: cat $HOME/.bashrc && ls -R $HOME/.cargo && echo $PATH
     - name: env
       run: env
     - name: cargo
-      run: echo $PATH && . ~/.cargo/env && cargo --version
+      run: echo $PATH && . ~/.cargo/env && rustup show  && cargo --version
       shell: bash --noprofile -eo pipefail {0}
     - name: Build
       run: . /root/.cargo/env && echo $PATH && cargo build --verbose
