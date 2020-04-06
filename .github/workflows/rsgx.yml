@@ -18,23 +18,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: cat 
-      run: cat /root/.bashrc
     - name: Copy .bashrc for Github Actions' $HOME
       run: cp /root/.bashrc $HOME/.bashrc
     - name: adjust rust toolchains for Github Actions
       run: |
         ln -sf /root/.rustup ~/.rustup &&
         ln -sf /root/.cargo ~/.cargo
-    - name: check
-      run: cat $HOME/.bashrc && ls -R $HOME/.cargo && echo $PATH
-    - name: env
-      run: env
     - name: cargo
       run: echo $PATH && . ~/.cargo/env && rustup show  && cargo --version
-      shell: bash --noprofile -eo pipefail {0}
+      shell: bash
     - name: Build
-      run: . /root/.cargo/env && echo $PATH && cargo build --verbose
+      run: . ~/.cargo/env && cargo build --verbose
     - name: Run tests
       run: cd tests/sgx && cmake .. && make test-sgx
       shell: bash
