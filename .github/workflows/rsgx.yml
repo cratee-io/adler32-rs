@@ -24,6 +24,9 @@ jobs:
       run: |
         ln -sf /root/.rustup ~/.rustup &&
         ln -sf /root/.cargo ~/.cargo
+    - name: cargo1
+      run: . ~/.bashrc && cargo --version
+      shell: bash
     - name: cargo
       run: echo $PATH && . ~/.cargo/env && rustup show  && cargo --version
       shell: bash
