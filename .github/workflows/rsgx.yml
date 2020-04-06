@@ -24,14 +24,16 @@ jobs:
       run: |
         ln -sf /root/.rustup ~/.rustup &&
         ln -sf /root/.cargo ~/.cargo
-    - name: cargo1
-      run: . ~/.bashrc && cargo --version
-      shell: bash
-    - name: cargo
-      run: echo $PATH && . ~/.cargo/env && rustup show  && cargo --version
+    - name: Rust toolchains
+      run: |
+        . ~/.cargo/env && 
+        rustc --version &&
+        rustup --version &&
+        cargo --version
       shell: bash
     - name: Build
-      run: . ~/.cargo/env && cargo build --verbose
+      run: . ~/.cargo/env && . /opt/intel/sgxsdk/environment && cargo build --verbose
+      shell: bash
     - name: Run tests
       run: cd tests/sgx && cmake .. && make test-sgx
       shell: bash
