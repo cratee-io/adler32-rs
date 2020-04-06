@@ -244,6 +244,7 @@ mod test {
 
             let r = io::Cursor::new(bytes);
             assert_eq!(adler32(r).unwrap(), v);
+            assert!(false, "false");
         }
         do_test(0x00000001, b"");
         do_test(0x00620062, b"a");
