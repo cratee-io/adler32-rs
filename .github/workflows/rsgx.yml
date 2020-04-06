@@ -15,10 +15,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Copy .bashrc for Github Actions' $HOME
-      run: cp /root/.bashrc $HOME/.bashrc
-    - name: adjust rust toolchains for Github Actions
+    - name: Set up Github Actions' $HOME
       run: |
+        cp /root/.bashrc $HOME/.bashrc &&
         ln -sf /root/.rustup ~/.rustup &&
         ln -sf /root/.cargo ~/.cargo
     - name: Rust toolchains
@@ -29,8 +28,16 @@ jobs:
         cargo --version
       shell: bash
     - name: Build
-      run: . ~/.cargo/env && . /opt/sgxsdk/environment && cargo build --verbose
+      run: |
+        . ~/.cargo/env && 
+        . /opt/sgxsdk/environment && 
+        cargo build --verbose
       shell: bash
     - name: Run tests
-      run: cd tests/sgx && cmake .. && make test-sgx
+      run: |
+        . ~/.cargo/env && 
+        . /opt/sgxsdk/environment && 
+        cd tests/sgx && 
+        cmake .. && 
+        make test-sgx
       shell: bash
