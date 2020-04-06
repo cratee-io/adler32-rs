@@ -27,17 +27,18 @@ jobs:
         rustup --version &&
         cargo --version
       shell: bash
-    - name: Build
-      run: |
-        . ~/.cargo/env && 
-        . /opt/sgxsdk/environment && 
-        cargo build --verbose
-      shell: bash
+    #- name: Build
+    #  run: |
+    #    . ~/.cargo/env && 
+    #    . /opt/sgxsdk/environment && 
+    #    cargo build --verbose
+    #  shell: bash
     - name: Run tests
       run: |
         . ~/.cargo/env && 
         . /opt/sgxsdk/environment && 
-        cd tests/sgx && 
+        mkdir tests/sgx/build &&
+        cd tests/sgx/build &&
         cmake .. && 
         make test-sgx
       shell: bash
