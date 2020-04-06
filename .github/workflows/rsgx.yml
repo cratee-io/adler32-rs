@@ -25,7 +25,7 @@ jobs:
     - name: adjust rust toolchains for Github Actions
       run: ln -sf /root/.cargo $HOME/.cargo
     - name: check
-      run: cat $HOME/.bashrc && ls -R $HOME/.cargo
+      run: cat $HOME/.bashrc && ls -R $HOME/.cargo && echo $PATH
     - name: cargo
       run: cargo --version
       shell: bash --noprofile -eo pipefail {0}
