@@ -12,9 +12,6 @@ jobs:
     runs-on: ubuntu-18.04
     container: 
       image: baiduxlab/sgx-rust:1804-1.1.1
-      #image: rust:1.42
-      env:
-        RUST_VERSION: nightly-2020-03-12
 
     steps:
     - uses: actions/checkout@v2
@@ -32,7 +29,7 @@ jobs:
         cargo --version
       shell: bash
     - name: Build
-      run: . ~/.cargo/env && . /opt/intel/sgxsdk/environment && cargo build --verbose
+      run: . ~/.cargo/env && . /opt/sgxsdk/environment && cargo build --verbose
       shell: bash
     - name: Run tests
       run: cd tests/sgx && cmake .. && make test-sgx
