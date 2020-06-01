@@ -14,7 +14,7 @@
 extern crate sgx_tstd as std;
 use std::prelude::v1::*;
 
-#[cfg(feature = "testing")]
+#[cfg(feature = "with-testing")]
 //#[cfg(test)]
 extern crate rand;
 
@@ -210,9 +210,9 @@ pub fn adler32<R: io::Read>(mut reader: R) -> io::Result<u32> {
     Ok(hash.hash())
 }
 
-#[cfg(feature = "testing")]
 //#[cfg(test)]
-mod test {
+#[cfg(feature = "with-testing")]
+pub mod tests {
     use std::prelude::v1::*;
     use std::vec;
 
@@ -221,6 +221,10 @@ mod test {
     use std::io;
 
     use super::{adler32, RollingAdler32, BASE};
+
+    use testing::{generate_runner, test};
+
+    generate_runner!();
 
     fn adler32_slow<R: io::Read>(reader: R) -> io::Result<u32> {
         let mut a: u32 = 1;
@@ -235,7 +239,7 @@ mod test {
         Ok((b << 16) | a)
     }
 
-    //#[test]
+    #[test]
     fn testvectors() {
         fn do_test(v: u32, bytes: &[u8]) {
             let mut hash = RollingAdler32::new();
@@ -264,7 +268,7 @@ mod test {
         do_test(0xD6251498, &[255; 64000]);
     }
 
-    //#[test]
+    #[test]
     fn compare() {
         let mut rng = rand::thread_rng();
         let mut data = vec![0u8; 5589];
@@ -283,7 +287,7 @@ mod test {
         }
     }
 
-    //#[test]
+    #[test]
     fn rolling() {
         assert_eq!(RollingAdler32::from_value(0x01020304).hash(), 0x01020304);
 
@@ -304,7 +308,7 @@ mod test {
         do_test(b"this a ", b"test");
     }
 
-    //#[test]
+    #[test]
     fn long_window_remove() {
         let mut hash = RollingAdler32::new();
         let w = 65536;
@@ -326,13 +330,4 @@ mod test {
         }
         assert_eq!(hash.hash(), 0xbbba8772);
     }
-
-    use sgx_tunittest::*;
-
-    pub fn do_rsgx_test() {
-        rsgx_unit_tests!(compare, long_window_remove, rolling, testvectors,);
-    }
 }
-
-#[cfg(feature = "testing")]
-pub use test::do_rsgx_test;

@@ -15,20 +15,25 @@ exclude = ["/tests/sgx/*"]
 [dev-dependencies]
 #rand = "0.4"
 
-[dependencies]
-sgx_tstd = { git = "https://github.com/apache/teaclave-sgx-sdk", rev = "v1.1.1" }
+[dependencies.inventory]
+optional    = true
+version     = "0.1.6"
 
 [dependencies.rand]
-package = "sgx_rand"
-git = "https://github.com/apache/teaclave-sgx-sdk"
-optional = true
-rev = "v1.1.1"
+package     = "sgx_rand"
+git         = "https://github.com/apache/teaclave-sgx-sdk"
+optional    = true
+rev         = "v1.1.2"
 
-[dependencies.sgx_tunittest]
-git = "https://github.com/apache/teaclave-sgx-sdk"
-optional = true
-rev = "v1.1.1"
+[dependencies.sgx_tstd]
+git         = "https://github.com/apache/teaclave-sgx-sdk"
+rev         = "v1.1.2"
+
+[dependencies.testing]
+branch      = "rsgx1.1.2"
+git         = "https://github.com/sammyne/teaclave-testing"
+optional    = true
 
 [features]
 default = []
-testing = ["rand", "sgx_tunittest"]
+with-testing = ["inventory", "rand", "testing"]

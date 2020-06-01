@@ -4,7 +4,7 @@
 [![Documentation](https://docs.rs/adler32/badge.svg)](https://docs.rs/adler32)
 [![License](https://img.shields.io/crates/l/adler32.svg)](https://github.com/remram44/adler32-rs/blob/master/LICENSE)
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/remram44)
-![rsgx](https://github.com/sammyne/adler32-rs/workflows/rsgx/badge.svg?branch=rsgx1.1.1)
+![rsgx](https://github.com/sammyne/adler32-rs/workflows/rsgx/badge.svg?branch=rsgx1.1.2)
 
 What is this?
 =============
