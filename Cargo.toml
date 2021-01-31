@@ -16,20 +16,36 @@ license = "Zlib"
 core = { version = '1.0.0', optional = true, package = 'rustc-std-workspace-core' }
 compiler_builtins = { version = '0.1.2', optional = true }
 
+[dependencies.rand]
+package     = "sgx_rand"
+git         = "https://github.com/apache/teaclave-sgx-sdk"
+optional    = true
+
+[dependencies.sgx_tstd]
+git         = "https://github.com/apache/teaclave-sgx-sdk"
+optional    = true
+
+[dependencies.testing]
+branch      = "main"
+git         = "https://github.com/cratee-io/testing"
+optional    = true
+
 [features]
 default = ['std']
-std = []
+std = ['sgx_tstd']
 
 # Internal feature, only used when building as part of libstd, not part of the
 # stable interface of this crate.
 rustc-dep-of-std = ['core', 'compiler_builtins']
+
+with-testing = ["rand", "testing"]
 
 [dev-dependencies]
 # The lines marked 'benchmark only' get removed on CI for platforms/versions
 # where we don't run the benchmarks (e.g. versions not supported by criterion)
 criterion = "0.3" # benchmark only
 humansize = "1.1" # benchmark only
-rand = "0.7"
+#rand = "0.7"
 getrandom = { version = "0.1", features = ["wasm-bindgen"] }
 
 [target.'cfg(target_arch = "wasm32")'.dev-dependencies]

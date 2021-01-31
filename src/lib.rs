@@ -9,8 +9,12 @@
 //! the zlib implementation.
 
 #![forbid(unsafe_code)]
-#![cfg_attr(not(feature = "std"), no_std)]
+#![no_std]
 
+#[cfg(feature = "std")]
+extern crate sgx_tstd as std;
+#[cfg(feature = "std")]
+use std::prelude::v1::*;
 
 // adler32 algorithm and implementation taken from zlib; http://www.zlib.net/
 // It was translated into Rust as accurately as I could manage
@@ -204,10 +208,18 @@ pub fn adler32<R: std::io::Read>(mut reader: R) -> std::io::Result<u32> {
     Ok(hash.hash())
 }
 
-#[cfg(test)]
-mod test {
+#[cfg(feature = "with-testing")]
+pub mod tests {
+    use std::prelude::v1::*;
+    use std::vec;
+
+    use testing::{generate_runner, test};
+
+    generate_runner!();
+
     use rand::Rng;
     use std::io;
+
     #[cfg(target_arch = "wasm32")]
     use wasm_bindgen_test::wasm_bindgen_test;
 
@@ -267,7 +279,7 @@ mod test {
         .iter()
         .cloned()
         {
-            rng.fill(&mut data[..size]);
+            rng.fill_bytes(&mut data[..size]);
             let r1 = io::Cursor::new(&data[..size]);
             let r2 = r1.clone();
             if adler32_slow(r1).unwrap() != adler32(r2).unwrap() {

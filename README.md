@@ -1,3 +1,4 @@
+![rsgx](https://github.com/cratee-io/adler32-rs/workflows/rsgx/badge.svg)
 [![Build Status](https://github.com/remram44/adler32-rs/workflows/Test/badge.svg)](https://github.com/remram44/adler32-rs/actions)
 [![Win Build](https://ci.appveyor.com/api/projects/status/ekyg20rd6rwrus64/branch/master?svg=true)](https://ci.appveyor.com/project/remram44/adler32-rs)
 [![Crates.io](https://img.shields.io/crates/v/adler32.svg)](https://crates.io/crates/adler32)
